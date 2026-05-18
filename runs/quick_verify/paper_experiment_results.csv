@@ -1,0 +1,4 @@
+﻿model,train_acc_last,val_acc_best,test_accuracy,test_precision,test_recall,test_f1,train_time,best_epoch,total_params,trainable_params
+basic_cnn,0.5,0.5,0.5,0.25,0.5,0.3333333333333333,6s,1,15481262,15481262
+augmented_cnn,0.5,0.5,0.5,0.25,0.5,0.3333333333333333,2s,1,15481262,15481262
+transfer_resnet50,0.5,0.5,0.5,0.25,0.5,0.3333333333333333,5s,1,24688962,1180930

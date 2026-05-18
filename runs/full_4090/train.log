@@ -1,0 +1,214 @@
+======================================================================
+基于卷积神经网络的图像分类应用研究
+——从基础 CNN 到迁移学习的递进实践
+======================================================================
+运行参数：
+data_dir: doc/dogs-vs-cats-redux-kernels-edition/train
+output_dir: runs/full_4090
+mode: main
+epochs: 30
+batch_size: 32
+lr: 0.001
+patience: 10
+image_size: 224
+num_workers: 4
+seed: 42
+norm: dataset
+limit_per_class: None
+pretrained: True
+gradcam: False
+======================================================================
+扫描完成：共 25000 张图像，其中 Cat=12500, Dog=12500
+数据清洗完成：有效图像 25000 张，损坏图像 0 张
+损坏图像报告：runs/full_4090/bad_images_report.csv
+训练集：20000，验证集：2500，测试集：2500
+划分文件已保存：runs/full_4090/dataset_split.csv
+正在计算训练集均值和标准差...
+训练集 mean = [0.4881, 0.4547, 0.4167]
+训练集 std = [0.2596, 0.253, 0.2555]
+======================================================================
+开始训练：basic_cnn
+总参数量：15,481,262
+可训练参数：15,481,262
+设备：cuda
+======================================================================
+Epoch [01/30] Train Loss=0.6446, Train Acc=0.6734, Val Loss=0.4899, Val Acc=0.7668, LR=0.001000
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.7668
+Epoch [02/30] Train Loss=0.4555, Train Acc=0.7845, Val Loss=0.5194, Val Acc=0.7360, LR=0.001000
+Epoch [03/30] Train Loss=0.3814, Train Acc=0.8295, Val Loss=0.3817, Val Acc=0.8356, LR=0.001000
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.8356
+Epoch [04/30] Train Loss=0.3225, Train Acc=0.8585, Val Loss=0.3307, Val Acc=0.8668, LR=0.001000
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.8668
+Epoch [05/30] Train Loss=0.2669, Train Acc=0.8851, Val Loss=0.3653, Val Acc=0.8416, LR=0.001000
+Epoch [06/30] Train Loss=0.2370, Train Acc=0.8995, Val Loss=0.2782, Val Acc=0.8856, LR=0.001000
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.8856
+Epoch [07/30] Train Loss=0.1981, Train Acc=0.9178, Val Loss=0.2972, Val Acc=0.8748, LR=0.001000
+Epoch [08/30] Train Loss=0.1640, Train Acc=0.9333, Val Loss=0.3645, Val Acc=0.8684, LR=0.001000
+Epoch [09/30] Train Loss=0.1331, Train Acc=0.9449, Val Loss=0.3399, Val Acc=0.8744, LR=0.001000
+Epoch [10/30] Train Loss=0.1102, Train Acc=0.9574, Val Loss=0.4317, Val Acc=0.8564, LR=0.001000
+Epoch [11/30] Train Loss=0.0873, Train Acc=0.9661, Val Loss=0.4174, Val Acc=0.8852, LR=0.001000
+Epoch [12/30] Train Loss=0.0758, Train Acc=0.9709, Val Loss=0.4029, Val Acc=0.8880, LR=0.000500
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.8880
+Epoch [13/30] Train Loss=0.0321, Train Acc=0.9875, Val Loss=0.4555, Val Acc=0.9032, LR=0.000500
+ -> 保存最佳模型：best_basic_cnn.pth，Val Acc=0.9032
+Epoch [14/30] Train Loss=0.0204, Train Acc=0.9921, Val Loss=0.4721, Val Acc=0.8992, LR=0.000500
+Epoch [15/30] Train Loss=0.0212, Train Acc=0.9922, Val Loss=0.5238, Val Acc=0.8960, LR=0.000500
+Epoch [16/30] Train Loss=0.0180, Train Acc=0.9939, Val Loss=0.5575, Val Acc=0.8952, LR=0.000500
+Epoch [17/30] Train Loss=0.0158, Train Acc=0.9942, Val Loss=0.6087, Val Acc=0.8960, LR=0.000500
+Epoch [18/30] Train Loss=0.0164, Train Acc=0.9943, Val Loss=0.5860, Val Acc=0.8936, LR=0.000250
+Epoch [19/30] Train Loss=0.0062, Train Acc=0.9975, Val Loss=0.6546, Val Acc=0.9008, LR=0.000250
+Epoch [20/30] Train Loss=0.0024, Train Acc=0.9990, Val Loss=0.7002, Val Acc=0.8996, LR=0.000250
+Epoch [21/30] Train Loss=0.0027, Train Acc=0.9993, Val Loss=0.8364, Val Acc=0.8956, LR=0.000250
+Epoch [22/30] Train Loss=0.0048, Train Acc=0.9984, Val Loss=0.7795, Val Acc=0.8976, LR=0.000250
+/root/VisionCNN/experiments/cats_dogs_cnn.py:587: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_model_path, map_location=device))
+Epoch [23/30] Train Loss=0.0082, Train Acc=0.9973, Val Loss=0.7072, Val Acc=0.8996, LR=0.000250
+早停触发：验证准确率连续 10 轮未提升。
+训练完成：basic_cnn
+最佳验证准确率：0.9032，出现在 Epoch 13
+训练耗时：6m48s
+----------------------------------------------------------------------
+basic_cnn 测试集结果：
+Accuracy : 0.9048
+Precision: 0.9072
+Recall   : 0.9048
+F1-score : 0.9047
+Confusion Matrix:
+[[1083  167]
+ [  71 1179]]
+----------------------------------------------------------------------
+======================================================================
+开始训练：augmented_cnn
+总参数量：15,481,262
+可训练参数：15,481,262
+设备：cuda
+======================================================================
+Epoch [01/30] Train Loss=0.7522, Train Acc=0.5631, Val Loss=0.6459, Val Acc=0.6004, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.6004
+Epoch [02/30] Train Loss=0.6612, Train Acc=0.5877, Val Loss=0.6707, Val Acc=0.5540, LR=0.001000
+Epoch [03/30] Train Loss=0.6464, Train Acc=0.6168, Val Loss=0.6126, Val Acc=0.6784, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.6784
+Epoch [04/30] Train Loss=0.6211, Train Acc=0.6538, Val Loss=0.5681, Val Acc=0.7164, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.7164
+Epoch [05/30] Train Loss=0.6014, Train Acc=0.6764, Val Loss=0.5507, Val Acc=0.7268, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.7268
+Epoch [06/30] Train Loss=0.5817, Train Acc=0.6931, Val Loss=0.5225, Val Acc=0.7568, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.7568
+Epoch [07/30] Train Loss=0.5667, Train Acc=0.7062, Val Loss=0.5125, Val Acc=0.7640, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.7640
+Epoch [08/30] Train Loss=0.5498, Train Acc=0.7246, Val Loss=0.4901, Val Acc=0.7752, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.7752
+Epoch [09/30] Train Loss=0.5375, Train Acc=0.7330, Val Loss=0.4640, Val Acc=0.8020, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8020
+Epoch [10/30] Train Loss=0.5265, Train Acc=0.7435, Val Loss=0.4727, Val Acc=0.7764, LR=0.001000
+Epoch [11/30] Train Loss=0.5228, Train Acc=0.7465, Val Loss=0.5459, Val Acc=0.7172, LR=0.001000
+Epoch [12/30] Train Loss=0.5115, Train Acc=0.7562, Val Loss=0.4376, Val Acc=0.8128, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8128
+Epoch [13/30] Train Loss=0.4913, Train Acc=0.7674, Val Loss=0.4211, Val Acc=0.8068, LR=0.001000
+Epoch [14/30] Train Loss=0.4920, Train Acc=0.7669, Val Loss=0.3927, Val Acc=0.8360, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8360
+Epoch [15/30] Train Loss=0.4741, Train Acc=0.7820, Val Loss=0.4302, Val Acc=0.8052, LR=0.001000
+Epoch [16/30] Train Loss=0.4646, Train Acc=0.7870, Val Loss=0.4166, Val Acc=0.8304, LR=0.001000
+Epoch [17/30] Train Loss=0.4625, Train Acc=0.7887, Val Loss=0.3939, Val Acc=0.8336, LR=0.001000
+Epoch [18/30] Train Loss=0.4461, Train Acc=0.7962, Val Loss=0.3558, Val Acc=0.8492, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8492
+Epoch [19/30] Train Loss=0.4302, Train Acc=0.8087, Val Loss=0.3537, Val Acc=0.8540, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8540
+Epoch [20/30] Train Loss=0.4236, Train Acc=0.8127, Val Loss=0.3657, Val Acc=0.8412, LR=0.001000
+Epoch [21/30] Train Loss=0.4196, Train Acc=0.8148, Val Loss=0.4394, Val Acc=0.7960, LR=0.001000
+Epoch [22/30] Train Loss=0.4163, Train Acc=0.8200, Val Loss=0.3668, Val Acc=0.8348, LR=0.001000
+Epoch [23/30] Train Loss=0.3977, Train Acc=0.8290, Val Loss=0.3089, Val Acc=0.8812, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8812
+Epoch [24/30] Train Loss=0.3901, Train Acc=0.8317, Val Loss=0.2994, Val Acc=0.8848, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8848
+Epoch [25/30] Train Loss=0.3821, Train Acc=0.8343, Val Loss=0.3650, Val Acc=0.8520, LR=0.001000
+Epoch [26/30] Train Loss=0.3722, Train Acc=0.8426, Val Loss=0.3029, Val Acc=0.8868, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8868
+Epoch [27/30] Train Loss=0.3608, Train Acc=0.8488, Val Loss=0.3025, Val Acc=0.8844, LR=0.001000
+Epoch [28/30] Train Loss=0.3495, Train Acc=0.8502, Val Loss=0.3312, Val Acc=0.8588, LR=0.001000
+Epoch [29/30] Train Loss=0.3378, Train Acc=0.8615, Val Loss=0.2735, Val Acc=0.8992, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.8992
+/root/VisionCNN/experiments/cats_dogs_cnn.py:587: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_model_path, map_location=device))
+Epoch [30/30] Train Loss=0.3295, Train Acc=0.8616, Val Loss=0.2528, Val Acc=0.9012, LR=0.001000
+ -> 保存最佳模型：best_augmented_cnn.pth，Val Acc=0.9012
+训练完成：augmented_cnn
+最佳验证准确率：0.9012，出现在 Epoch 30
+训练耗时：12m07s
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+0.1%0.3%0.4%0.5%0.6%0.8%0.9%1.0%1.2%1.3%1.4%1.5%1.7%1.8%1.9%2.0%2.2%2.3%2.4%2.6%2.7%2.8%2.9%3.1%3.2%3.3%3.5%3.6%3.7%3.8%4.0%4.1%4.2%4.3%4.5%4.6%4.7%4.9%5.0%5.1%5.2%5.4%5.5%5.6%5.8%5.9%6.0%6.1%6.3%6.4%6.5%6.6%6.8%6.9%7.0%7.2%7.3%7.4%7.5%7.7%7.8%7.9%8.1%8.2%8.3%8.4%8.6%8.7%8.8%8.9%9.1%9.2%9.3%9.5%9.6%9.7%9.8%10.0%10.1%10.2%10.4%10.5%10.6%10.7%10.9%11.0%11.1%11.2%11.4%11.5%11.6%11.8%11.9%12.0%12.1%12.3%12.4%12.5%12.7%12.8%12.9%13.0%13.2%13.3%13.4%13.6%13.7%13.8%13.9%14.1%14.2%14.3%14.4%14.6%14.7%14.8%15.0%15.1%15.2%15.3%15.5%15.6%15.7%15.9%16.0%16.1%16.2%16.4%16.5%16.6%16.7%16.9%17.0%17.1%17.3%17.4%17.5%17.6%17.8%17.9%18.0%18.2%18.3%18.4%18.5%18.7%18.8%18.9%19.0%19.2%19.3%19.4%19.6%19.7%19.8%19.9%20.1%20.2%20.3%20.5%20.6%20.7%20.8%21.0%21.1%21.2%21.3%21.5%21.6%21.7%21.9%22.0%22.1%22.2%22.4%22.5%22.6%22.8%22.9%23.0%23.1%23.3%23.4%23.5%23.6%23.8%23.9%24.0%24.2%24.3%24.4%24.5%24.7%24.8%24.9%25.1%25.2%25.3%25.4%25.6%25.7%25.8%26.0%26.1%26.2%26.3%26.5%26.6%26.7%26.8%27.0%27.1%27.2%27.4%27.5%27.6%27.7%27.9%28.0%28.1%28.3%28.4%28.5%28.6%28.8%28.9%29.0%29.1%29.3%29.4%29.5%29.7%29.8%29.9%30.0%30.2%30.3%30.4%30.6%30.7%30.8%30.9%31.1%31.2%31.3%31.4%31.6%31.7%31.8%32.0%32.1%32.2%32.3%32.5%32.6%32.7%32.9%33.0%33.1%33.2%33.4%33.5%33.6%33.7%33.9%34.0%34.1%34.3%34.4%34.5%34.6%34.8%34.9%35.0%35.2%35.3%35.4%35.5%35.7%35.8%35.9%36.1%36.2%36.3%36.4%36.6%36.7%36.8%36.9%37.1%37.2%37.3%37.5%37.6%37.7%37.8%38.0%38.1%38.2%38.4%38.5%38.6%38.7%38.9%39.0%39.1%39.2%39.4%39.5%39.6%39.8%39.9%40.0%40.1%40.3%40.4%40.5%40.7%40.8%40.9%41.0%41.2%41.3%41.4%41.5%41.7%41.8%41.9%42.1%42.2%42.3%42.4%42.6%42.7%42.8%43.0%43.1%43.2%43.3%43.5%43.6%43.7%43.8%44.0%44.1%44.2%44.4%44.5%44.6%44.7%44.9%45.0%45.1%45.3%45.4%45.5%45.6%45.8%45.9%46.0%46.1%46.3%46.4%46.5%46.7%46.8%46.9%47.0%47.2%47.3%47.4%47.6%47.7%47.8%47.9%48.1%48.2%48.3%48.5%48.6%48.7%48.8%49.0%49.1%49.2%49.3%49.5%49.6%49.7%49.9%50.0%50.1%50.2%50.4%50.5%50.6%50.8%50.9%51.0%51.1%51.3%51.4%51.5%51.6%51.8%51.9%52.0%52.2%52.3%52.4%52.5%52.7%52.8%52.9%53.1%53.2%53.3%53.4%53.6%53.7%53.8%53.9%54.1%54.2%54.3%54.5%54.6%54.7%54.8%55.0%55.1%55.2%55.4%55.5%55.6%55.7%55.9%56.0%56.1%56.2%56.4%56.5%56.6%56.8%56.9%57.0%57.1%57.3%57.4%57.5%57.7%57.8%57.9%58.0%58.2%58.3%58.4%58.5%58.7%58.8%58.9%59.1%59.2%59.3%59.4%59.6%59.7%59.8%60.0%60.1%60.2%60.3%60.5%60.6%60.7%60.9%61.0%61.1%61.2%61.4%61.5%61.6%61.7%61.9%62.0%62.1%62.3%62.4%62.5%62.6%62.8%62.9%63.0%63.2%63.3%63.4%63.5%63.7%63.8%63.9%64.0%64.2%64.3%64.4%64.6%64.7%64.8%64.9%65.1%65.2%65.3%65.5%65.6%65.7%65.8%66.0%66.1%66.2%66.3%66.5%66.6%66.7%66.9%67.0%67.1%67.2%67.4%67.5%67.6%67.8%67.9%68.0%68.1%68.3%68.4%68.5%68.6%68.8%68.9%69.0%69.2%69.3%69.4%69.5%69.7%69.8%69.9%70.1%70.2%70.3%70.4%70.6%70.7%70.8%70.9%71.1%71.2%71.3%71.5%71.6%71.7%71.8%72.0%72.1%72.2%72.4%72.5%72.6%72.7%72.9%73.0%73.1%73.3%73.4%73.5%73.6%73.8%73.9%74.0%74.1%74.3%74.4%74.5%74.7%74.8%74.9%75.0%75.2%75.3%75.4%75.6%75.7%75.8%75.9%76.1%76.2%76.3%76.4%76.6%76.7%76.8%77.0%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.1%78.2%78.4%78.5%78.6%78.7%78.9%79.0%79.1%79.3%79.4%79.5%79.6%79.8%79.9%80.0%80.2%80.3%80.4%80.5%80.7%80.8%80.9%81.0%81.2%81.3%81.4%81.6%81.7%81.8%81.9%82.1%82.2%82.3%82.5%82.6%82.7%82.8%83.0%83.1%83.2%83.3%83.5%83.6%83.7%83.9%84.0%84.1%84.2%84.4%84.5%84.6%84.8%84.9%85.0%85.1%85.3%85.4%85.5%85.7%85.8%85.9%86.0%86.2%86.3%86.4%86.5%86.7%86.8%86.9%87.1%87.2%87.3%87.4%87.6%87.7%87.8%88.0%88.1%88.2%88.3%88.5%88.6%88.7%88.8%89.0%89.1%89.2%89.4%89.5%89.6%89.7%89.9%90.0%90.1%90.3%90.4%90.5%90.6%90.8%90.9%91.0%91.1%91.3%91.4%91.5%91.7%91.8%91.9%92.0%92.2%92.3%92.4%92.6%92.7%92.8%92.9%93.1%93.2%93.3%93.4%93.6%93.7%93.8%94.0%94.1%94.2%94.3%94.5%94.6%94.7%94.9%95.0%95.1%95.2%95.4%95.5%95.6%95.8%95.9%96.0%96.1%96.3%96.4%96.5%96.6%96.8%96.9%97.0%97.2%97.3%97.4%97.5%97.7%97.8%97.9%98.1%98.2%98.3%98.4%98.6%98.7%98.8%98.9%99.1%99.2%99.3%99.5%99.6%99.7%99.8%100.0%100.0%
+----------------------------------------------------------------------
+augmented_cnn 测试集结果：
+Accuracy : 0.9040
+Precision: 0.9044
+Recall   : 0.9040
+F1-score : 0.9040
+Confusion Matrix:
+[[1150  100]
+ [ 140 1110]]
+----------------------------------------------------------------------
+已加载 ResNet50 ImageNet 预训练权重。
+======================================================================
+开始训练：transfer_resnet50
+总参数量：24,688,962
+可训练参数：1,180,930
+设备：cuda
+======================================================================
+Epoch [01/30] Train Loss=0.1610, Train Acc=0.9346, Val Loss=0.0742, Val Acc=0.9708, LR=0.001000
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9708
+Epoch [02/30] Train Loss=0.1121, Train Acc=0.9568, Val Loss=0.0405, Val Acc=0.9828, LR=0.001000
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9828
+Epoch [03/30] Train Loss=0.1131, Train Acc=0.9534, Val Loss=0.0420, Val Acc=0.9840, LR=0.001000
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9840
+Epoch [04/30] Train Loss=0.1034, Train Acc=0.9611, Val Loss=0.0394, Val Acc=0.9852, LR=0.001000
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9852
+Epoch [05/30] Train Loss=0.0990, Train Acc=0.9604, Val Loss=0.0460, Val Acc=0.9840, LR=0.001000
+Epoch [06/30] Train Loss=0.0963, Train Acc=0.9625, Val Loss=0.0396, Val Acc=0.9836, LR=0.001000
+Epoch [07/30] Train Loss=0.1031, Train Acc=0.9603, Val Loss=0.0380, Val Acc=0.9840, LR=0.001000
+Epoch [08/30] Train Loss=0.0935, Train Acc=0.9637, Val Loss=0.0382, Val Acc=0.9848, LR=0.001000
+Epoch [09/30] Train Loss=0.0966, Train Acc=0.9633, Val Loss=0.0465, Val Acc=0.9844, LR=0.001000
+Epoch [10/30] Train Loss=0.0920, Train Acc=0.9637, Val Loss=0.0441, Val Acc=0.9852, LR=0.001000
+Epoch [11/30] Train Loss=0.0947, Train Acc=0.9634, Val Loss=0.0394, Val Acc=0.9852, LR=0.001000
+Epoch [12/30] Train Loss=0.0935, Train Acc=0.9630, Val Loss=0.0550, Val Acc=0.9780, LR=0.001000
+Epoch [13/30] Train Loss=0.0912, Train Acc=0.9662, Val Loss=0.0395, Val Acc=0.9840, LR=0.000500
+Epoch [14/30] Train Loss=0.0856, Train Acc=0.9657, Val Loss=0.0353, Val Acc=0.9864, LR=0.000500
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9864
+Epoch [15/30] Train Loss=0.0798, Train Acc=0.9679, Val Loss=0.0342, Val Acc=0.9860, LR=0.000500
+Epoch [16/30] Train Loss=0.0825, Train Acc=0.9678, Val Loss=0.0347, Val Acc=0.9864, LR=0.000500
+Epoch [17/30] Train Loss=0.0849, Train Acc=0.9671, Val Loss=0.0327, Val Acc=0.9876, LR=0.000500
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9876
+Epoch [18/30] Train Loss=0.0818, Train Acc=0.9679, Val Loss=0.0338, Val Acc=0.9868, LR=0.000500
+Epoch [19/30] Train Loss=0.0803, Train Acc=0.9685, Val Loss=0.0335, Val Acc=0.9852, LR=0.000500
+Epoch [20/30] Train Loss=0.0795, Train Acc=0.9705, Val Loss=0.0416, Val Acc=0.9848, LR=0.000500
+Epoch [21/30] Train Loss=0.0866, Train Acc=0.9659, Val Loss=0.0345, Val Acc=0.9860, LR=0.000500
+Epoch [22/30] Train Loss=0.0761, Train Acc=0.9690, Val Loss=0.0313, Val Acc=0.9872, LR=0.000500
+Epoch [23/30] Train Loss=0.0787, Train Acc=0.9690, Val Loss=0.0338, Val Acc=0.9880, LR=0.000500
+ -> 保存最佳模型：best_transfer_resnet50.pth，Val Acc=0.9880
+Epoch [24/30] Train Loss=0.0750, Train Acc=0.9708, Val Loss=0.0338, Val Acc=0.9860, LR=0.000500
+Epoch [25/30] Train Loss=0.0763, Train Acc=0.9718, Val Loss=0.0341, Val Acc=0.9876, LR=0.000500
+Epoch [26/30] Train Loss=0.0769, Train Acc=0.9706, Val Loss=0.0380, Val Acc=0.9880, LR=0.000500
+Epoch [27/30] Train Loss=0.0797, Train Acc=0.9708, Val Loss=0.0347, Val Acc=0.9856, LR=0.000500
+Epoch [28/30] Train Loss=0.0761, Train Acc=0.9690, Val Loss=0.0353, Val Acc=0.9876, LR=0.000250
+Epoch [29/30] Train Loss=0.0763, Train Acc=0.9701, Val Loss=0.0362, Val Acc=0.9864, LR=0.000250
+/root/VisionCNN/experiments/cats_dogs_cnn.py:587: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_model_path, map_location=device))
+Epoch [30/30] Train Loss=0.0719, Train Acc=0.9724, Val Loss=0.0341, Val Acc=0.9868, LR=0.000250
+训练完成：transfer_resnet50
+最佳验证准确率：0.9880，出现在 Epoch 23
+训练耗时：12m16s
+----------------------------------------------------------------------
+transfer_resnet50 测试集结果：
+Accuracy : 0.9876
+Precision: 0.9876
+Recall   : 0.9876
+F1-score : 0.9876
+Confusion Matrix:
+[[1237   13]
+ [  18 1232]]
+----------------------------------------------------------------------
+
+全部实验完成。主要输出文件：
+runs/full_4090/dataset_split.csv
+runs/full_4090/paper_experiment_results.csv
+runs/full_4090/model_comparison.png
+runs/full_4090/validation_loss_curves.png
